@@ -1,0 +1,6 @@
+azure-storage-blob==12.19.0
+langchain
+openai
+python-dotenv
+streamlit
+streamlit_chat
