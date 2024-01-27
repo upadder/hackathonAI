@@ -15,7 +15,6 @@ os.environ["AZURE_OPENAI_API_KEY"] = os.getenv("AZURE_OPENAI_API_KEY")
 os.environ["AZURE_OPENAI_ENDPOINT"] = os.getenv("AZURE_OPENAI_ENDPOINT")
 
 
-model = "text-embedding-ada-002"
 vector_store_address: str = f"https://{os.environ.get('AZURE_COGNITIVE_SEARCH_SERVICE_NAME')}.search.windows.net"
 
 
@@ -40,7 +39,7 @@ loader = AzureBlobStorageContainerLoader(
 )
 
 documents = loader.load()
-text_splitter = CharacterTextSplitter(chunk_size=2500, chunk_overlap=250)
+text_splitter = CharacterTextSplitter(chunk_size=150, chunk_overlap=20)
 docs = text_splitter.split_documents(documents)
 print('docs')
 vector_store.add_documents(documents=docs)

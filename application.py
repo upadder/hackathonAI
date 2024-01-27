@@ -1,12 +1,14 @@
 import streamlit as st
 from streamlit_chat import message
 from langchain.retrievers import AzureCognitiveSearchRetriever
-from langchain.chains import ConversationalRetrievalChain
+# from langchain.chains import ConversationalRetrievalChain
+from langchain.chains import RetrievalQA
 from langchain.llms.openai import AzureOpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
 import os
 import openai
+import streamlit.components.v1 as com
 
 # Load Azure OpenAI configuration from environment variables
 AZURE_OPENAI_KEY = os.environ.get("AZURE_OPENAI_API_KEY")
@@ -22,32 +24,23 @@ openai.api_version = '2023-05-15'
 memory = ConversationBufferMemory(
     memory_key="chat_history", return_messages=True, output_key="answer"
 )
+llm = AzureOpenAI(
+    deployment_name=AZURE_OPENAI_CHATGPT_DEPLOYMENT,
+    openai_api_key=AZURE_OPENAI_KEY
+)
+retriever = AzureCognitiveSearchRetriever(content_key="content", top_k=5)
+prompt_template = PromptTemplate(
+    template="{context}\nQ: {question}\nA:",
+    input_variables=["context", "question"]
+)
 
-def load_chain():
-    prompt_template = """{context}  Question: {question}  Answer here:"""
-    PROMPT = PromptTemplate(
-        template=prompt_template, input_variables=["context", "question"]
-    )
-
-    retriever = AzureCognitiveSearchRetriever(content_key="content", top_k=10)
-
-    llm = AzureOpenAI(deployment_name=AZURE_OPENAI_CHATGPT_DEPLOYMENT, temperature=0.7, openai_api_key=AZURE_OPENAI_KEY,verbose=True)
-    chain = ConversationalRetrievalChain.from_llm(
-        llm=llm,
-        memory=memory,
-        retriever=retriever,
-        combine_docs_chain_kwargs={"prompt": PROMPT},
-    )
-
-    return chain
+qa_chain = RetrievalQA.from_llm(llm=llm, retriever=retriever)
 
 
-
-chain = load_chain()
-print(chain)
-st.set_page_config(page_title="LangChain Demo", page_icon=":robot:")
+st.set_page_config(page_title="Stony Brook ChatBot", page_icon=":robot:")
 
 st.write("# Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋")
+# com.iframe("https://giphy.com/embed/05SnCznuyjnqlQeHb0")
 st.sidebar.success("Select a demo above.")
 #st.header("Stony Brook University Admissions Bot")
 
@@ -77,18 +70,24 @@ if "past" not in st.session_state:
     st.session_state["past"] = []
 
 
-def get_text():
+def get_user_input():
     input_text = st.text_input("You: ", "", key="input",placeholder = "Start chatting with WolfieBot! Enter your query..")
     return input_text
 
 
-user_input = get_text()
+user_input = get_user_input()
 
 if user_input:
-    output = chain.run(question=user_input)
-    st.session_state.past.append(user_input)
-    st.session_state.generated.append(output)
+    # Run the chain with the user's question
+    result = qa_chain.invoke({"query": user_input})
+    st.write(result)
+    answer = jsonify(result["result"])
+    
+    # Display the response in the Streamlit chat
+    st.session_state["past"].append(user_input)
+    st.session_state["generated"].append(answer)
 
+# Display past chat messages
 if st.session_state["generated"]:
     for i in range(len(st.session_state["generated"]) - 1, -1, -1):
         message(st.session_state["generated"][i], key=str(i))
