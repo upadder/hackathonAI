@@ -74,7 +74,7 @@ def add_custom_css():
     st.markdown("""
         <style>
             .text-box {
-                background-color: rgba(255, 255, 255, 0.7); /* White background with 70% opacity */
+                background-color: rgba(255, 255, 255, 0.7); /* White background with 90% opacity */
                 border-radius: 10px; /* Rounded corners */
                 padding: 20px; /* Padding around text */
                 margin: 10px 0; /* Some space above and below */
@@ -88,7 +88,7 @@ add_custom_css()
 st.write("# Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋")
 
 # with st.container():
-st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTM2bmN0cTluY3l5NHY1cGJqZnpmaGR0ZnQ1aXF6dXlocjVzcGZrYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gw0mIEsSYC48oxsl8s/giphy.gif")
+# st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTM2bmN0cTluY3l5NHY1cGJqZnpmaGR0ZnQ1aXF6dXlocjVzcGZrYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gw0mIEsSYC48oxsl8s/giphy.gif")
 
 st.markdown(
     """
@@ -156,7 +156,7 @@ if user_input:
     # Display the response in the Streamlit chat
     st.session_state["past"].append(user_input)
     st.session_state["generated"].append(answer)
-    st.session_state.input = ""
+    user_input=""
 
 # Display past chat messages
 if st.session_state["generated"]:
