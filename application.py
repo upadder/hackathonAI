@@ -97,7 +97,7 @@ def add_custom_css():
 add_custom_css()
 # add_custom_css_bg()
 
-st.markdown('<h1 class="text-box-bg"> Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="text-box"> Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋</h1>', unsafe_allow_html=True)
 # with st.container():
 # st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTM2bmN0cTluY3l5NHY1cGJqZnpmaGR0ZnQ1aXF6dXlocjVzcGZrYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gw0mIEsSYC48oxsl8s/giphy.gif")
 
