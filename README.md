@@ -1,44 +1,23 @@
-# LangChain Demo Application 🤖
+#Introduction: The objective of this project is to create a chatbot using LangChain on Microsoft Azure for Stony Brook University Admissions. Key Microsoft Azure services utilized include Azure Web App, Blob Storage, Cognitive Search, Vector Database, and Container Registry. The final product is a website allowing users to interact with a database, all deployed on Azure. The report includes a code walkthrough and deployment steps.
 
-LangChain Demo is a Streamlit-based web application that provides an interactive Q&A experience about a fictive animal called "huninchen". It integrates Azure services and leverages OpenAI to create a smooth, responsive, and insightful experience.
+#Azure Overview: Microsoft Azure is a cloud computing platform offering services like infrastructure as a service (IaaS), platform as a service (PaaS), and software as a service (SaaS). Azure facilitates application management and deployment across Microsoft’s global data center network. An Azure subscription is an agreement with Microsoft for using its cloud platforms or services, billed monthly or pay-as-you-go. Azure organizes services in resource groups, which are containers holding related resources for an Azure solution.
 
-## Prerequisites
+#Key Azure Services Used:
 
-For this project, ensure you have set up:
+Azure Web App: Hosts web applications, APIs, and mobile backends. Simplifies hosting without infrastructure concerns. Supports deployment as code or Docker container.
+Blob Storage: Optimized for storing large amounts of unstructured data, ideal for the chatbot’s data serving needs.
+Azure Cognitive Search: A powerful cloud search service for web and mobile applications. Acts as a vector database, aiding the chatbot in efficient information retrieval.
+Azure Container Registry: Manages and stores Docker container images, used for deploying the chatbot.
+#Creating a Resource Group: The process starts with creating a resource group in Azure. Resource group is a collection of resources (services, databases, virtual machines, etc.) that are managed together. It acts like a container where related resources for an Azure solution are grouped. The group acts as a virtual folder for grouping Azure services.
 
-1. **Azure Container Registry**: To manage the Docker images.
-2. **App Services**: Where the application will be hosted.
-3. **Blob Storage**: For storing unstructured data.
-4. **Azure Cognitive Search**: Powers the application's Q&A functionality.
-5. **OpenAI API Key**: For generating natural language model responses.
+#Blob Storage & Upload: A storage account is created within the resource group, followed by a blob container setup. The container is set to private access level. We uploaded files to this container using Python, highlighting the use of connection strings and container names.
 
-## Configuration
+#Azure Cognitive Search: A new cognitive search service is created within the resource group.We need to carefully select pricing tiers to avoid high costs, hence recommending the free tier. The service is then configured using Python SDK, including creating an index and inserting data from Blob storage.
 
-### `.env.example`
+#Streamlit Web Application: This section walks through the development of a Streamlit web application. It uses Azure Cognitive Search Retriever and other objects like conversation buffer memory. The application code, structured for UI creation, is prepared for Docker containerization.
 
-```bash
-OPENAI_API_KEY=YOUR_OPENAI_API_KEY
-AZURE_COGNITIVE_SEARCH_SERVICE_NAME=YOUR_AZURE_COGNITIVE_SEARCH_SERVICE_NAME
-AZURE_COGNITIVE_SEARCH_INDEX_NAME=YOUR_AZURE_COGNITIVE_SEARCH_INDEX_NAME
-AZURE_COGNITIVE_SEARCH_API_KEY=YOUR_AZURE_COGNITIVE_SEARCH_API_KEY
-AZURE_CONN_STRING=YOUR_AZURE_CONN_STRING
-CONTAINER_NAME=YOUR_CONTAINER_NAME
-```
+#Container Registry & Docker Image: A new Azure Container Registry is created. Then building and pushing the Docker image to this registry, including login procedures and setting environment variables is done.
 
-Replace placeholder values (`YOUR_...`) with actual values from your environment.
+#Deploying to Azure Web Service: The final step involves deploying the Docker image to an Azure Web Service, and creating a web app with the deployed image. The process includes configuring environment variables and ensuring the correct startup commands are set.
 
-### `blob.py`
-
-This script automates the process of uploading data from the local "Data" directory to Azure Blob storage. It initializes a connection to the Blob service and then uploads each file it discovers in the specified directory to the container.
-
-### `azurecognitive_search.py`
-
-This script is responsible for creating vector embeddings from documents and loading them into Azure Cognitive Search. It uses the OpenAI API for embedding generation. Once the embeddings are created, they are stored in the Azure Search index, making them readily available for fast and efficient searching.
-
-### `application.py`
-
-This is the main Streamlit application. It sets up a conversational interface where users can input questions. The input is then processed with the help of OpenAI's model and Azure Cognitive Search, and an appropriate answer is retrieved or generated. Past interactions can be reviewed in the session.
-
----
-
-To get started with the LangChain Demo Application, first, ensure that the necessary Azure services are set up and that the `.env` file is correctly populated with the required keys and identifiers. Follow the deployment steps for Azure to host and run your application.
+#Conclusion: We have successfully demonstrated the deployed chatbot called Wolfiebot and showed its interaction with the Vector store. The presenter encourages questions in the comments and invites viewers to subscribe to the channel.
