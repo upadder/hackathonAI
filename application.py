@@ -88,7 +88,7 @@ add_custom_css()
 st.write("# Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋")
 
 st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTM2bmN0cTluY3l5NHY1cGJqZnpmaGR0ZnQ1aXF6dXlocjVzcGZrYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gw0mIEsSYC48oxsl8s/giphy.gif")
-st.sidebar.success("Select a demo above.")
+# st.sidebar.success("Select a demo above.")
 #st.header("Stony Brook University Admissions Bot")
 
 st.markdown(""" 
