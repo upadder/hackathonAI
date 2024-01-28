@@ -81,21 +81,21 @@ def add_custom_css():
         </style>
     """, unsafe_allow_html=True)
 
-def add_custom_css_bg():
-    st.markdown("""
-        <style>
-            .text-box-bg {
-                background-color: rgba(255, 255, 255, 0.7); /* White background with 70% opacity */
-                border-radius: 10px; /* Rounded corners */
-                padding: 20px; /* Padding around text */
-                margin: 10px 0; /* Some space above and below */
-            }
-        </style>
-    """, unsafe_allow_html=True)
+# def add_custom_css_bg():
+#     st.markdown("""
+#         <style>
+#             .text-box-bg {
+#                 background-color: rgba(255, 255, 255, 0.7); /* White background with 70% opacity */
+#                 border-radius: 10px; /* Rounded corners */
+#                 padding: 20px; /* Padding around text */
+#                 margin: 10px 0; /* Some space above and below */
+#             }
+#         </style>
+#     """, unsafe_allow_html=True)
 
 # Apply the custom CSS for styling
 add_custom_css()
-add_custom_css_bg()
+# add_custom_css_bg()
 
 st.markdown('<h1 class="text-box-bg"> Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋</h1>', unsafe_allow_html=True)
 # with st.container():
