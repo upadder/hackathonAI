@@ -87,7 +87,19 @@ add_custom_css()
 
 st.write("# Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋")
 
-st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTM2bmN0cTluY3l5NHY1cGJqZnpmaGR0ZnQ1aXF6dXlocjVzcGZrYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gw0mIEsSYC48oxsl8s/giphy.gif")
+with st.container():
+    st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTM2bmN0cTluY3l5NHY1cGJqZnpmaGR0ZnQ1aXF6dXlocjVzcGZrYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gw0mIEsSYC48oxsl8s/giphy.gif")
+
+st.markdown("""
+    <style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Adjust to your preference */
+    }
+    </style>
+""", unsafe_allow_html=True)
 # st.sidebar.success("Select a demo above.")
 #st.header("Stony Brook University Admissions Bot")
 
