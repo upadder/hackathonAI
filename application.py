@@ -1,4 +1,5 @@
 import streamlit as st
+import re
 from streamlit_chat import message
 from langchain.retrievers import AzureCognitiveSearchRetriever
 # from langchain.chains import ConversationalRetrievalChain
@@ -29,22 +30,71 @@ llm = AzureOpenAI(
     openai_api_key=AZURE_OPENAI_KEY
 )
 retriever = AzureCognitiveSearchRetriever(content_key="content", top_k=5)
+context = """
+As WolfieBot, the AI assistant for Stony Brook University Admissions, you are here to help with user queries about application processes,
+ deadlines, course information, campus life, and more, ensuring that your answers are always based on the knowledge you have.
+If you face a question that you can't answer with your current knowledge, suggest alternative ways to find the information user need,
+ such as directing user to the university's official website or
+   recommending contact with the relevant department. if the details can be found out from your knowledge by some more details then ask more specific question to user!
+"""
+
+# Update the PromptTemplate to include context
 prompt_template = PromptTemplate(
-    template="{context}\nQ: {question}\nA:",
-    input_variables=["context", "question"]
+    template=f"{context}\n\nQ: {{question}}\nA:",
+    input_variables=["question"]
 )
 
 qa_chain = RetrievalQA.from_llm(llm=llm, retriever=retriever)
 
 
+
 st.set_page_config(page_title="Stony Brook ChatBot", page_icon=":robot:")
 
+def add_bg_from_url(url):
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url({url});
+            background-size: cover;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+# URL or path to your background image
+bg_url = 'https://www.stonybrook.edu/undergraduate-admissions/_images/sbudifference/student-life/background-doodles.png'
+
+# Set the background image
+add_bg_from_url(bg_url)
+# st.markdown (""" Hello World""")
+
+def add_custom_css():
+    st.markdown("""
+        <style>
+            .text-box {
+                background-color: rgba(255, 255, 255, 0.7); /* White background with 70% opacity */
+                border-radius: 10px; /* Rounded corners */
+                padding: 20px; /* Padding around text */
+                margin: 10px 0; /* Some space above and below */
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
+# Apply the custom CSS for styling
+add_custom_css()
+
 st.write("# Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋")
-# com.iframe("https://giphy.com/embed/05SnCznuyjnqlQeHb0")
+
+st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTM2bmN0cTluY3l5NHY1cGJqZnpmaGR0ZnQ1aXF6dXlocjVzcGZrYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gw0mIEsSYC48oxsl8s/giphy.gif")
 st.sidebar.success("Select a demo above.")
 #st.header("Stony Brook University Admissions Bot")
 
-st.markdown(""" 🌟 Welcome to Stony Brook University's WolfieBot! 🐺🤖
+st.markdown(""" 
+             <div class="text-box">
+            
+            🌟 Welcome to Stony Brook University's WolfieBot! 🐺🤖
 
 Hey future Seawolves! 🎓 Are you excited about exploring your journey at Stony Brook University? Meet WolfieBot, your friendly guide, powered by Azure Cognitive Intelligence, here to help you navigate the exciting world of college admissions! 🚀
 
@@ -61,7 +111,7 @@ Hey future Seawolves! 🎓 Are you excited about exploring your journey at Stony
 🤝 **Supportive Community** - Join the Stony Brook family. I'm here not just to answer questions but to welcome you into our diverse and vibrant community. Let's embark on this exciting journey together! ❤️
 
 Ready to get started? Just type in your question below and let the adventure begin with WolfieBot, your trusted companion on the road to becoming a Seawolf! 🐺💬
- """)
+    </div>""", unsafe_allow_html=True)
 
 if "generated" not in st.session_state:
     st.session_state["generated"] = []
@@ -75,14 +125,14 @@ def get_user_input():
     return input_text
 
 
+# if st.button("Start Chating"):
 user_input = get_user_input()
-
 if user_input:
     # Run the chain with the user's question
     result = qa_chain.invoke({"query": user_input})
-    st.write(result)
-    answer = jsonify(result["result"])
-    
+    answer = result.get("result", "I'm not sure how to answer that.")
+    pattern = r'Context:|Question:|"""|\\|\n'
+    answer = re.split(pattern, answer, flags=re.IGNORECASE)[0].strip()
     # Display the response in the Streamlit chat
     st.session_state["past"].append(user_input)
     st.session_state["generated"].append(answer)
