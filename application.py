@@ -81,10 +81,23 @@ def add_custom_css():
         </style>
     """, unsafe_allow_html=True)
 
+def add_custom_css_bg():
+    st.markdown("""
+        <style>
+            .text-box-bg {
+                background-color: rgba(255, 255, 255, 0.7); /* White background with 70% opacity */
+                border-radius: 10px; /* Rounded corners */
+                padding: 20px; /* Padding around text */
+                margin: 10px 0; /* Some space above and below */
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
 # Apply the custom CSS for styling
 add_custom_css()
+add_custom_css_bg()
 
-st.markdown('<h1 class="text-box"> Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="text-box-bg"> Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋</h1>', unsafe_allow_html=True)
 # with st.container():
 # st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTM2bmN0cTluY3l5NHY1cGJqZnpmaGR0ZnQ1aXF6dXlocjVzcGZrYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gw0mIEsSYC48oxsl8s/giphy.gif")
 
