@@ -90,6 +90,14 @@ st.write("# Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋"
 # with st.container():
 st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTM2bmN0cTluY3l5NHY1cGJqZnpmaGR0ZnQ1aXF6dXlocjVzcGZrYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gw0mIEsSYC48oxsl8s/giphy.gif")
 
+st.markdown(
+    """
+    <div style="display: flex; justify-content: center;">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTM2bmN0cTluY3l5NHY1cGJqZnpmaGR0ZnQ1aXF6dXlocjVzcGZrYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gw0mIEsSYC48oxsl8s/giphy.gif" alt="Centered GIF" width="300">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 # st.markdown("""
 #     <style>
 #     .container {
