@@ -64,7 +64,7 @@ def add_bg_from_url(url):
     )
 
 # URL or path to your background image
-bg_url = 'https://drive.google.com/file/d/1UB-g7Yp22qw0pNZ4oKru4yu3Nq7ufNd5/view?usp=sharing'
+bg_url = 'https://www.stonybrook.edu/undergraduate-admissions/_images/sbudifference/student-life/background-doodles.png'
 
 # Set the background image
 add_bg_from_url(bg_url)
