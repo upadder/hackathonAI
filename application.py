@@ -131,11 +131,12 @@ if user_input:
     # Run the chain with the user's question
     result = qa_chain.invoke({"query": user_input})
     answer = result.get("result", "I'm not sure how to answer that.")
-    pattern = r'Context:|Question:|"""|\\|\n'
+    pattern = r'Context:|Question:|"""|\\|\n|<|im_end|>'
     answer = re.split(pattern, answer, flags=re.IGNORECASE)[0].strip()
     # Display the response in the Streamlit chat
     st.session_state["past"].append(user_input)
     st.session_state["generated"].append(answer)
+    st.session_state.input = ""
 
 # Display past chat messages
 if st.session_state["generated"]:
