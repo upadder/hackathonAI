@@ -64,7 +64,7 @@ def add_bg_from_url(url):
     )
 
 # URL or path to your background image
-bg_url = 'https://i.ibb.co/ys9B1Qk/Background-Image.jpg'
+bg_url = 'https://i.ibb.co/1690B21/Presentation4.png'
 
 # Set the background image
 add_bg_from_url(bg_url)
@@ -74,7 +74,7 @@ def add_custom_css():
     st.markdown("""
         <style>
             .text-box {
-                background-color: rgba(255, 255, 255, 0.7); /* White background with 90% opacity */
+                background-color: rgba(255, 255, 255, 0.9); /* White background with 90% opacity */
                 border-radius: 10px; /* Rounded corners */
                 padding: 20px; /* Padding around text */
                 margin: 10px 0; /* Some space above and below */
@@ -85,8 +85,7 @@ def add_custom_css():
 # Apply the custom CSS for styling
 add_custom_css()
 
-st.write("# Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋")
-
+st.markdown('<h1 class="text-box"> Welcome to Stony Brook University Admissions Bot - WolfieBot ! 👋</h1>', unsafe_allow_html=True)
 # with st.container():
 # st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTM2bmN0cTluY3l5NHY1cGJqZnpmaGR0ZnQ1aXF6dXlocjVzcGZrYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/gw0mIEsSYC48oxsl8s/giphy.gif")
 
