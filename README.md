@@ -11,7 +11,7 @@ Wolfiebot is an AI-powered Virtual Admissions Bot developed using OpenAI and Mic
 | Arnav Saxena      | Stony Brook University           | arsaxena@cs.stonybrook.edu            |
 | Shreepooja Singh  | Stony Brook University           | shreepooja.singh@stonybrook.edu       |
 | Prakash Upadhyay  | Stony Brook University           | prakash.upadhyay@stonybrook.edu       |
-| Ronald Ngounou    | University of the District of Columbia | Email not provided                 |
+| Ronald Ngounou    | University of the District of Columbia | ronald.ngounou@yahoo.com        |
 
 ## Purpose
 The Wolfiebot Virtual Admissions Bot is specifically designed for Stony Brook University to assist in the college admissions process. It serves as an innovative tool for high school students seeking information about college attendance, application procedures, and campus life at Stony Brook University.
