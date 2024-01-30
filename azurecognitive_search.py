@@ -41,6 +41,5 @@ loader = AzureBlobStorageContainerLoader(
 documents = loader.load()
 text_splitter = CharacterTextSplitter(chunk_size=150, chunk_overlap=20)
 docs = text_splitter.split_documents(documents)
-print('docs')
 vector_store.add_documents(documents=docs)
 print("Data loaded into vectorstore successfully")
